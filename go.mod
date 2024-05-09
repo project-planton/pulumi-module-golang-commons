@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/plantoncloud/planton-cloud-apis v0.0.173
-	github.com/pulumi/pulumi/sdk/v3 v3.115.2
+	github.com/pulumi/pulumi/sdk/v3 v3.104.2
 )
 
 require (
