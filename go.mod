@@ -1,6 +1,6 @@
 module github.com/plantoncloud/pulumi-blueprint-commons
 
-go 1.22.2
+go 1.21
 
 require (
 	github.com/plantoncloud/planton-cloud-apis v0.0.173
