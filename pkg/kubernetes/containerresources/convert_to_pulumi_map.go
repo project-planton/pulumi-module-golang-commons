@@ -1,4 +1,4 @@
-package jenkinsserver
+package containerresources
 
 import (
 	plantoncloudkubeclustermodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/code2cloud/v1/kubecluster/model"
