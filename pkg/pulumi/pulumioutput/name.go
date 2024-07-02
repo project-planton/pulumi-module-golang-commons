@@ -1,4 +1,4 @@
-package pulumioutputname
+package pulumioutput
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func GetName(t reflect.Type, name string) string {
+func Name(t reflect.Type, name string) string {
 	ts := strings.ReplaceAll(t.String(), "*", "")
 	ts = strings.ReplaceAll(ts, ".", "-")
 	ts = strings.ToLower(ts)

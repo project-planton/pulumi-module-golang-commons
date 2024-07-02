@@ -5,7 +5,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
 	iacv1sjmodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/iac/v1/stackjob/model/credentials"
-	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutputname"
+	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutput"
 	"github.com/pulumi/pulumi-aws-native/sdk/go/aws"
 	awsclassic "github.com/pulumi/pulumi-aws/sdk/v6/go/aws"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -14,7 +14,7 @@ import (
 
 func GetNative(ctx *pulumi.Context, awsProviderCredential *iacv1sjmodel.AwsProviderCredential,
 	region string, nameSuffixes ...string) (*aws.Provider, error) {
-	awsNative, err := aws.NewProvider(ctx, getName(nameSuffixes), &aws.ProviderArgs{
+	awsNative, err := aws.NewProvider(ctx, ProviderResourceName(nameSuffixes), &aws.ProviderArgs{
 		AccessKey: pulumi.String(awsProviderCredential.AwsAccessKeyId),
 		SecretKey: pulumi.String(awsProviderCredential.AwsSecretAccessKey),
 		Region:    pulumi.String(region),
@@ -28,7 +28,7 @@ func GetNative(ctx *pulumi.Context, awsProviderCredential *iacv1sjmodel.AwsProvi
 func GetClassic(ctx *pulumi.Context, awsProviderCredential *iacv1sjmodel.AwsProviderCredential,
 	region string, nameSuffixes ...string) (*awsclassic.Provider, error) {
 
-	awsClassic, err := awsclassic.NewProvider(ctx, getName(nameSuffixes), &awsclassic.ProviderArgs{
+	awsClassic, err := awsclassic.NewProvider(ctx, ProviderResourceName(nameSuffixes), &awsclassic.ProviderArgs{
 		AccessKey: pulumi.String(awsProviderCredential.AwsAccessKeyId),
 		SecretKey: pulumi.String(awsProviderCredential.AwsSecretAccessKey),
 		Region:    pulumi.String(region),
@@ -40,7 +40,7 @@ func GetClassic(ctx *pulumi.Context, awsProviderCredential *iacv1sjmodel.AwsProv
 	return awsClassic, nil
 }
 
-func getName(suffixes []string) string {
+func ProviderResourceName(suffixes []string) string {
 	name := englishword.EnglishWord_aws.String()
 	for _, s := range suffixes {
 		name = fmt.Sprintf("%s-%s", name, s)
@@ -49,9 +49,10 @@ func getName(suffixes []string) string {
 }
 
 func PulumiOutputName(r interface{}, name string, suffixes ...string) string {
-	awsName := fmt.Sprintf("%s_%s", englishword.EnglishWord_aws.String(), pulumioutputname.GetName(reflect.TypeOf(r), name))
+	outputName := fmt.Sprintf("%s_%s", englishword.EnglishWord_aws.String(),
+		pulumioutput.Name(reflect.TypeOf(r), name))
 	for _, s := range suffixes {
-		awsName = fmt.Sprintf("%s_%s", awsName, s)
+		outputName = fmt.Sprintf("%s_%s", outputName, s)
 	}
-	return awsName
+	return outputName
 }

@@ -13,13 +13,14 @@ import (
 // the provider creation should depend on the readiness of the node-pools
 func GetWithAddedClusterWithGsaKey(ctx *pulumi.Context, serviceAccountKey *serviceaccount.Key, addedContainerCluster *container.Cluster,
 	addedNodePools []pulumi.Resource, nameSuffixes ...string) (*kubernetes.Provider, error) {
-	provider, err := kubernetes.NewProvider(ctx, pulumikubernetesprovider.GetPulumiResourceName(nameSuffixes), &kubernetes.ProviderArgs{
-		EnableServerSideApply: pulumi.Bool(true),
-		Kubeconfig: pulumi.Sprintf(GoogleCredentialPluginKubeConfigTemplate,
-			addedContainerCluster.Endpoint,
-			addedContainerCluster.MasterAuth.ClusterCaCertificate().Elem(),
-			serviceAccountKey.PrivateKey),
-	}, pulumi.DependsOn(addedNodePools))
+	provider, err := kubernetes.NewProvider(ctx, pulumikubernetesprovider.ProviderResourceName(nameSuffixes),
+		&kubernetes.ProviderArgs{
+			EnableServerSideApply: pulumi.Bool(true),
+			Kubeconfig: pulumi.Sprintf(GoogleCredentialPluginKubeConfigTemplate,
+				addedContainerCluster.Endpoint,
+				addedContainerCluster.MasterAuth.ClusterCaCertificate().Elem(),
+				serviceAccountKey.PrivateKey),
+		}, pulumi.DependsOn(addedNodePools))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get new provider")
 	}

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
 	iacv1sjmodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/iac/v1/stackjob/model/credentials"
-	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutputname"
+	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutput"
 	"reflect"
 
 	"github.com/pkg/errors"
@@ -19,7 +19,7 @@ func Get(ctx *pulumi.Context, googleProviderCredential *iacv1sjmodel.GoogleProvi
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to decode base64 encoded google service account credential")
 	}
-	provider, err := gcp.NewProvider(ctx, getName(nameSuffixes), &gcp.ProviderArgs{
+	provider, err := gcp.NewProvider(ctx, ProviderResourceName(nameSuffixes), &gcp.ProviderArgs{
 		Credentials: pulumi.String(gsaCredentialString),
 	})
 	if err != nil {
@@ -28,7 +28,7 @@ func Get(ctx *pulumi.Context, googleProviderCredential *iacv1sjmodel.GoogleProvi
 	return provider, nil
 }
 
-func getName(suffixes []string) string {
+func ProviderResourceName(suffixes []string) string {
 	name := englishword.EnglishWord_google.String()
 	for _, s := range suffixes {
 		name = fmt.Sprintf("%s-%s", name, s)
@@ -37,9 +37,9 @@ func getName(suffixes []string) string {
 }
 
 func PulumiOutputName(r interface{}, name string, suffixes ...string) string {
-	gcpName := fmt.Sprintf("gcp_%s", pulumioutputname.GetName(reflect.TypeOf(r), name))
+	outputName := fmt.Sprintf("gcp_%s", pulumioutput.Name(reflect.TypeOf(r), name))
 	for _, s := range suffixes {
-		gcpName = fmt.Sprintf("%s_%s", gcpName, s)
+		outputName = fmt.Sprintf("%s_%s", outputName, s)
 	}
-	return gcpName
+	return outputName
 }

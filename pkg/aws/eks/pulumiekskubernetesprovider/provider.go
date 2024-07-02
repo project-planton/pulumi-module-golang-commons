@@ -13,16 +13,17 @@ import (
 func GetWithAddedClusterWithAwsCredentials(ctx *pulumi.Context, addedEksCluster *eks.Cluster,
 	awsProvider *awsclassic.Provider,
 	dependencies []pulumi.Resource, nameSuffixes ...string) (*kubernetes.Provider, error) {
-	provider, err := kubernetes.NewProvider(ctx, pulumikubernetesprovider.GetPulumiResourceName(nameSuffixes), &kubernetes.ProviderArgs{
-		EnableServerSideApply: pulumi.Bool(true),
-		Kubeconfig: pulumi.Sprintf(AwsCredentialPluginKubeConfigTemplate,
-			addedEksCluster.Endpoint,
-			addedEksCluster.CertificateAuthority.Data().Elem(),
-			awsProvider.AccessKey.Elem(),
-			awsProvider.SecretKey.Elem(),
-			awsProvider.Region.Elem(),
-		),
-	}, pulumi.DependsOn(dependencies))
+	provider, err := kubernetes.NewProvider(ctx, pulumikubernetesprovider.ProviderResourceName(nameSuffixes),
+		&kubernetes.ProviderArgs{
+			EnableServerSideApply: pulumi.Bool(true),
+			Kubeconfig: pulumi.Sprintf(AwsCredentialPluginKubeConfigTemplate,
+				addedEksCluster.Endpoint,
+				addedEksCluster.CertificateAuthority.Data().Elem(),
+				awsProvider.AccessKey.Elem(),
+				awsProvider.SecretKey.Elem(),
+				awsProvider.Region.Elem(),
+			),
+		}, pulumi.DependsOn(dependencies))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get new provider")
 	}

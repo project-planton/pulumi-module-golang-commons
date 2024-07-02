@@ -1,4 +1,4 @@
-package pulumicustomoutputname
+package pulumicustomoutput
 
 import "fmt"
 
