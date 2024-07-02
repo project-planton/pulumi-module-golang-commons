@@ -1,4 +1,4 @@
-module github.com/plantoncloud/pulumi-blueprint-commons
+module github.com/plantoncloud/pulumi-blueprint-golang-commons
 
 go 1.21
 

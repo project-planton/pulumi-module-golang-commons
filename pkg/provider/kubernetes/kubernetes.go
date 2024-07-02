@@ -9,7 +9,7 @@ import (
 
 	"github.com/pkg/errors"
 	base642 "github.com/plantoncloud-inc/go-commons/encoding/base64"
-	"github.com/plantoncloud/pulumi-blueprint-commons/pkg/provider/kubernetes/kubeconfig"
+	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/provider/kubernetes/kubeconfig"
 	awsclassic "github.com/pulumi/pulumi-aws/sdk/v6/go/aws"
 	"github.com/pulumi/pulumi-aws/sdk/v6/go/aws/eks"
 	"github.com/pulumi/pulumi-gcp/sdk/v7/go/gcp/container"

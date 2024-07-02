@@ -1,1 +1,1 @@
-# pulumi-blueprint-commons
+# pulumi-blueprint-golang-commons
