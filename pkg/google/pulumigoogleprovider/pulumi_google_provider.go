@@ -1,10 +1,12 @@
-package google
+package pulumigoogleprovider
 
 import (
 	"encoding/base64"
 	"fmt"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
 	iacv1sjmodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/iac/v1/stackjob/model/credentials"
+	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutputname"
+	"reflect"
 
 	"github.com/pkg/errors"
 	base642 "github.com/plantoncloud-inc/go-commons/encoding/base64"
@@ -32,4 +34,12 @@ func getName(suffixes []string) string {
 		name = fmt.Sprintf("%s-%s", name, s)
 	}
 	return name
+}
+
+func PulumiOutputName(r interface{}, name string, suffixes ...string) string {
+	gcpName := fmt.Sprintf("gcp_%s", pulumioutputname.GetName(reflect.TypeOf(r), name))
+	for _, s := range suffixes {
+		gcpName = fmt.Sprintf("%s_%s", gcpName, s)
+	}
+	return gcpName
 }
