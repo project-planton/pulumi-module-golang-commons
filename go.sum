@@ -152,6 +152,8 @@ github.com/plantoncloud-inc/go-commons v0.0.431 h1:Jl7egEU//rxymixoTVMlGlkPCvvDr
 github.com/plantoncloud-inc/go-commons v0.0.431/go.mod h1:RfAOMv4/x5xzgZoWVqvGVquiVqWXCYclU5tJGmrx0Oo=
 github.com/plantoncloud/planton-cloud-apis v0.0.210 h1:ZuqGjw6eNQ2AY+/Ht74v77fDIiQdDq/WWGCpaI+Z468=
 github.com/plantoncloud/planton-cloud-apis v0.0.210/go.mod h1:y1LFk2+lhkY1KKqQ/t1R+WXPEwraH1aKfhOxVjZIaOY=
+github.com/plantoncloud/planton-cloud-apis v0.0.211 h1:EHVETRnyjxih5rE6kFw5MBsilMwnpHmKTBGoLywyVWw=
+github.com/plantoncloud/planton-cloud-apis v0.0.211/go.mod h1:y1LFk2+lhkY1KKqQ/t1R+WXPEwraH1aKfhOxVjZIaOY=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 h1:vkHw5I/plNdTr435cARxCW6q9gc0S/Yxz7Mkd38pOb0=
