@@ -1,11 +1,11 @@
 package containerresources
 
 import (
-	plantoncloudkubeclustermodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/code2cloud/v1/kubecluster/model"
+	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/kubernetes/model"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func ConvertToPulumiMap(resources *plantoncloudkubeclustermodel.ContainerResources) pulumi.Map {
+func ConvertToPulumiMap(resources *model.ContainerResources) pulumi.Map {
 	return pulumi.Map{
 		"limits": pulumi.Map{
 			"cpu":    pulumi.String(resources.Limits.Cpu),

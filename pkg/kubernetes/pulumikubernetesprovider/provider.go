@@ -1,28 +1,28 @@
 package pulumikubernetesprovider
 
 import (
-	"encoding/base64"
 	"fmt"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
-	iacv1sjmodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/iac/v1/stackjob/model/credentials"
+	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/kubernetesclustercredential/model"
 	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutput"
 	"reflect"
 
 	"github.com/pkg/errors"
-	base642 "github.com/plantoncloud-inc/go-commons/encoding/base64"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// GetWithStackCredentials returns kubernetes provider for the kubernetes credential in the stack credential
-func GetWithStackCredentials(ctx *pulumi.Context,
-	kubernetesProviderCredential *iacv1sjmodel.KubernetesProviderCredential,
+const (
+	_ExecPluginPath = "/usr/local/bin/kube-client-go-google-credential-plugin"
+)
+
+// GetWithKubernetesClusterCredential returns kubernetes provider for the kubernetes cluster credential
+func GetWithKubernetesClusterCredential(ctx *pulumi.Context,
+	kubernetesClusterCredential *model.KubernetesClusterCredential,
 	nameSuffixes ...string) (*kubernetes.Provider, error) {
-	kubeConfigString, err := base64.StdEncoding.DecodeString(
-		base642.CleanString(kubernetesProviderCredential.KubeconfigBase64))
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to decode base64 encoded kube-config")
-	}
+
+	kubeConfigString := buildGkeKubeConfigWithCredentialPlugin(kubernetesClusterCredential)
+
 	provider, err := kubernetes.NewProvider(ctx, ProviderResourceName(nameSuffixes), &kubernetes.ProviderArgs{
 		EnableServerSideApply: pulumi.Bool(true),
 		Kubeconfig:            pulumi.String(kubeConfigString),
@@ -31,6 +31,39 @@ func GetWithStackCredentials(ctx *pulumi.Context,
 		return nil, errors.Wrap(err, "failed to get new provider")
 	}
 	return provider, nil
+}
+
+// buildGkeKubeConfigWithCredentialPlugin generates a base64 encoded kubeconfig from the GKE cluster details.
+func buildGkeKubeConfigWithCredentialPlugin(kubernetesClusterCredential *model.KubernetesClusterCredential) string {
+	kubeconfigFormatString := `apiVersion: v1
+kind: Config
+current-context: kube-context
+contexts:
+- name: kube-context
+  context: {cluster: gke-cluster, user: kube-user}
+clusters:
+- name: gke-cluster
+  cluster:
+    server: https://%s
+    certificate-authority-data: %s
+users:
+- name: kube-user
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1
+      interactiveMode: Never
+      command: %s
+      args:
+        - %s
+`
+	gkeClusterSpec := kubernetesClusterCredential.Spec.GkeClusterSpec
+	return fmt.Sprintf(
+		kubeconfigFormatString,
+		gkeClusterSpec.ClusterEndpoint,
+		gkeClusterSpec.ClusterCaData,
+		_ExecPluginPath,
+		gkeClusterSpec.ServiceAccountKeyBase64,
+	)
 }
 
 func ProviderResourceName(suffixes []string) string {

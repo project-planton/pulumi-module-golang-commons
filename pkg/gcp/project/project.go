@@ -3,7 +3,7 @@ package project
 import (
 	"github.com/pkg/errors"
 	"github.com/plantoncloud-inc/go-commons/cloud/gcp/apis"
-	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/google/googleapi"
+	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/gcp/googleapi"
 	"github.com/pulumi/pulumi-gcp/sdk/v7/go/gcp/organizations"
 	"github.com/pulumi/pulumi-gcp/sdk/v7/go/gcp/projects"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
