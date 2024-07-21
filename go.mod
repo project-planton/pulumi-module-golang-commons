@@ -2,6 +2,8 @@ module github.com/plantoncloud/pulumi-blueprint-golang-commons
 
 go 1.21
 
+replace github.com/plantoncloud/planton-cloud-apis => ../planton-cloud-apis
+
 require (
 	github.com/pkg/errors v0.9.1
 	github.com/plantoncloud-inc/go-commons v0.0.431

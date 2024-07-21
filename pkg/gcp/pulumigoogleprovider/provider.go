@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
-	iacv1sjmodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/iac/v1/stackjob/model/credentials"
+	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/gcpcredential/model"
 	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutput"
 	"reflect"
 
@@ -14,13 +14,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func Get(ctx *pulumi.Context, googleProviderCredential *iacv1sjmodel.GoogleProviderCredential, nameSuffixes ...string) (*gcp.Provider, error) {
-	gsaCredentialString, err := base64.StdEncoding.DecodeString(base642.CleanString(googleProviderCredential.ServiceAccountKeyBase64))
+func Get(ctx *pulumi.Context, gcpCredential *model.GcpCredential, nameSuffixes ...string) (*gcp.Provider, error) {
+	serviceAccountKey, err := base64.StdEncoding.DecodeString(
+		base642.CleanString(gcpCredential.Spec.ServiceAccountKeyBase64))
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to decode base64 encoded google service account credential")
+		return nil, errors.Wrap(err, "failed to decode base64 encoded"+
+			" google service account credential")
 	}
 	provider, err := gcp.NewProvider(ctx, ProviderResourceName(nameSuffixes), &gcp.ProviderArgs{
-		Credentials: pulumi.String(gsaCredentialString),
+		Credentials: pulumi.String(serviceAccountKey),
 	})
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get new provider")

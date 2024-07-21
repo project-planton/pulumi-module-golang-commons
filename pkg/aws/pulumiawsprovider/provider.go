@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
-	iacv1sjmodel "github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/iac/v1/stackjob/model/credentials"
+	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/awscredential/model"
 	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutput"
 	"github.com/pulumi/pulumi-aws-native/sdk/go/aws"
 	awsclassic "github.com/pulumi/pulumi-aws/sdk/v6/go/aws"
@@ -12,11 +12,11 @@ import (
 	"reflect"
 )
 
-func GetNative(ctx *pulumi.Context, awsProviderCredential *iacv1sjmodel.AwsProviderCredential,
+func GetNative(ctx *pulumi.Context, awsCredential *model.AwsCredential,
 	region string, nameSuffixes ...string) (*aws.Provider, error) {
 	awsNative, err := aws.NewProvider(ctx, ProviderResourceName(nameSuffixes), &aws.ProviderArgs{
-		AccessKey: pulumi.String(awsProviderCredential.AwsAccessKeyId),
-		SecretKey: pulumi.String(awsProviderCredential.AwsSecretAccessKey),
+		AccessKey: pulumi.String(awsCredential.Spec.AccessKeyId),
+		SecretKey: pulumi.String(awsCredential.Spec.SecretAccessKey),
 		Region:    pulumi.String(region),
 	})
 	if err != nil {
@@ -25,12 +25,12 @@ func GetNative(ctx *pulumi.Context, awsProviderCredential *iacv1sjmodel.AwsProvi
 	return awsNative, nil
 }
 
-func GetClassic(ctx *pulumi.Context, awsProviderCredential *iacv1sjmodel.AwsProviderCredential,
+func GetClassic(ctx *pulumi.Context, awsCredential *model.AwsCredential,
 	region string, nameSuffixes ...string) (*awsclassic.Provider, error) {
 
 	awsClassic, err := awsclassic.NewProvider(ctx, ProviderResourceName(nameSuffixes), &awsclassic.ProviderArgs{
-		AccessKey: pulumi.String(awsProviderCredential.AwsAccessKeyId),
-		SecretKey: pulumi.String(awsProviderCredential.AwsSecretAccessKey),
+		AccessKey: pulumi.String(awsCredential.Spec.AccessKeyId),
+		SecretKey: pulumi.String(awsCredential.Spec.SecretAccessKey),
 		Region:    pulumi.String(region),
 	})
 
