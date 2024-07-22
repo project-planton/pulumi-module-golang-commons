@@ -1,6 +1,6 @@
-module github.com/plantoncloud/pulumi-blueprint-golang-commons
+module github.com/plantoncloud/pulumi-module-golang-commons
 
-go 1.21
+go 1.22
 
 replace github.com/plantoncloud/planton-cloud-apis => ../planton-cloud-apis
 

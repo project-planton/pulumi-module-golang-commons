@@ -5,7 +5,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/awscredential/model"
-	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutput"
+	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/pulumi/pulumioutput"
 	"github.com/pulumi/pulumi-aws-native/sdk/go/aws"
 	awsclassic "github.com/pulumi/pulumi-aws/sdk/v6/go/aws"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"

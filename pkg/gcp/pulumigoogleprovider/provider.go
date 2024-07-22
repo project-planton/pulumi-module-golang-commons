@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/gcpcredential/model"
-	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/pulumi/pulumioutput"
+	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/pulumi/pulumioutput"
 	"reflect"
 
 	"github.com/pkg/errors"

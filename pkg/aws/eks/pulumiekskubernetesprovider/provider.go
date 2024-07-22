@@ -2,7 +2,7 @@ package pulumiekskubernetesprovider
 
 import (
 	"github.com/pkg/errors"
-	"github.com/plantoncloud/pulumi-blueprint-golang-commons/pkg/kubernetes/pulumikubernetesprovider"
+	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/kubernetes/pulumikubernetesprovider"
 	awsclassic "github.com/pulumi/pulumi-aws/sdk/v6/go/aws"
 	"github.com/pulumi/pulumi-aws/sdk/v6/go/aws/eks"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
