@@ -2,7 +2,7 @@ package pulumigkekubernetesprovider
 
 import (
 	"github.com/pkg/errors"
-	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/kubernetes/pulumikubernetesprovider"
+	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/kubernetes/pulumikubernetesprovider"
 	"github.com/pulumi/pulumi-gcp/sdk/v7/go/gcp/container"
 	"github.com/pulumi/pulumi-gcp/sdk/v7/go/gcp/serviceaccount"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
