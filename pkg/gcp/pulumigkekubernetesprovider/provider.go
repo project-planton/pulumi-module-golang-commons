@@ -9,18 +9,20 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// GetWithAddedClusterWithGsaKey returns kubernetes provider for the added container cluster based on the google provider
+// GetWithCreatedGkeClusterAndCreatedGsaKey returns kubernetes provider for the added container cluster based on the google provider
 // the provider creation should depend on the readiness of the node-pools
-func GetWithAddedClusterWithGsaKey(ctx *pulumi.Context, serviceAccountKey *serviceaccount.Key, addedContainerCluster *container.Cluster,
-	addedNodePools []pulumi.Resource, nameSuffixes ...string) (*kubernetes.Provider, error) {
+func GetWithCreatedGkeClusterAndCreatedGsaKey(ctx *pulumi.Context,
+	createdServiceAccountKey *serviceaccount.Key,
+	createdGkeCluster *container.Cluster,
+	dependencies []pulumi.Resource, nameSuffixes ...string) (*kubernetes.Provider, error) {
 	provider, err := kubernetes.NewProvider(ctx, pulumikubernetesprovider.ProviderResourceName(nameSuffixes),
 		&kubernetes.ProviderArgs{
 			EnableServerSideApply: pulumi.Bool(true),
-			Kubeconfig: pulumi.Sprintf(GoogleCredentialPluginKubeConfigTemplate,
-				addedContainerCluster.Endpoint,
-				addedContainerCluster.MasterAuth.ClusterCaCertificate().Elem(),
-				serviceAccountKey.PrivateKey),
-		}, pulumi.DependsOn(addedNodePools))
+			Kubeconfig: pulumi.Sprintf(GcpExecPluginKubeConfigTemplate,
+				createdGkeCluster.Endpoint,
+				createdGkeCluster.MasterAuth.ClusterCaCertificate().Elem(),
+				createdServiceAccountKey.PrivateKey),
+		}, pulumi.DependsOn(dependencies))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get new provider")
 	}
