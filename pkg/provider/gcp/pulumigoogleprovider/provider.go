@@ -9,14 +9,12 @@ import (
 	"reflect"
 
 	"github.com/pkg/errors"
-	base642 "github.com/plantoncloud-inc/go-commons/encoding/base64"
 	"github.com/pulumi/pulumi-gcp/sdk/v7/go/gcp"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 func Get(ctx *pulumi.Context, gcpCredential *model.GcpCredential, nameSuffixes ...string) (*gcp.Provider, error) {
-	serviceAccountKey, err := base64.StdEncoding.DecodeString(
-		base642.CleanString(gcpCredential.Spec.ServiceAccountKeyBase64))
+	serviceAccountKey, err := base64.StdEncoding.DecodeString(gcpCredential.Spec.ServiceAccountKeyBase64)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to decode base64 encoded"+
 			" google service account credential")
