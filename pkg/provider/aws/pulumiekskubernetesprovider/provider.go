@@ -3,7 +3,6 @@ package pulumiekskubernetesprovider
 import (
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/awscredential/model"
-	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/kubernetes/pulumikubernetesprovider"
 	"github.com/pulumi/pulumi-aws/sdk/v6/go/aws/eks"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -12,8 +11,9 @@ import (
 // GetWithCreatedEksClusterWithAwsCredentials returns kubernetes provider for the added eks cluster based on the aws provider
 func GetWithCreatedEksClusterWithAwsCredentials(ctx *pulumi.Context, createdEksCluster *eks.Cluster,
 	awsCredential *model.AwsCredential,
-	dependencies []pulumi.Resource, nameSuffixes ...string) (*kubernetes.Provider, error) {
-	provider, err := kubernetes.NewProvider(ctx, pulumikubernetesprovider.ProviderResourceName(nameSuffixes),
+	dependencies []pulumi.Resource, providerName string) (*kubernetes.Provider, error) {
+	provider, err := kubernetes.NewProvider(ctx,
+		providerName,
 		&kubernetes.ProviderArgs{
 			EnableServerSideApply: pulumi.Bool(true),
 			Kubeconfig: pulumi.Sprintf(AwsExecPluginKubeConfigTemplate,
