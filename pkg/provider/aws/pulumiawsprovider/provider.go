@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
-	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/awscredential/model"
+	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/awscredential"
 	"github.com/pulumi/pulumi-aws-native/sdk/go/aws"
 	awsclassic "github.com/pulumi/pulumi-aws/sdk/v6/go/aws"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func GetNative(ctx *pulumi.Context, awsCredential *model.AwsCredential,
+func GetNative(ctx *pulumi.Context, awsCredential *awscredential.AwsCredential,
 	nameSuffixes ...string) (*aws.Provider, error) {
 	awsNative, err := aws.NewProvider(ctx, ProviderResourceName(nameSuffixes), &aws.ProviderArgs{
 		AccessKey: pulumi.String(awsCredential.Spec.AccessKeyId),
@@ -23,7 +23,7 @@ func GetNative(ctx *pulumi.Context, awsCredential *model.AwsCredential,
 	return awsNative, nil
 }
 
-func GetClassic(ctx *pulumi.Context, awsCredential *model.AwsCredential,
+func GetClassic(ctx *pulumi.Context, awsCredential *awscredential.AwsCredential,
 	nameSuffixes ...string) (*awsclassic.Provider, error) {
 
 	awsClassic, err := awsclassic.NewProvider(ctx, ProviderResourceName(nameSuffixes), &awsclassic.ProviderArgs{

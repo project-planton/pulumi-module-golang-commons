@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
-	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/azurecredential/model"
+	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/azurecredential"
 	"github.com/pulumi/pulumi-azure/sdk/v5/go/azure"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func Get(ctx *pulumi.Context, azureCredential *model.AzureCredential,
+func Get(ctx *pulumi.Context, azureCredential *azurecredential.AzureCredential,
 	nameSuffixes ...string) (*azure.Provider, error) {
 	awsNative, err := azure.NewProvider(ctx, ProviderResourceName(nameSuffixes),
 		&azure.ProviderArgs{
