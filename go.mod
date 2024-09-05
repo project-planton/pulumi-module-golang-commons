@@ -1,14 +1,12 @@
 module github.com/plantoncloud/pulumi-module-golang-commons
 
-go 1.22.6
-
-toolchain go1.23.0
+go 1.23
 
 //replace github.com/plantoncloud/planton-cloud-apis => ../planton-cloud-apis
 
 require (
 	github.com/pkg/errors v0.9.1
-	github.com/plantoncloud/planton-cloud-apis v0.1.29
+	github.com/plantoncloud/planton-cloud-apis v0.1.43
 	github.com/pulumi/pulumi-aws-native/sdk v0.109.0
 	github.com/pulumi/pulumi-aws/sdk/v6 v6.42.1
 	github.com/pulumi/pulumi-azure/sdk/v5 v5.85.0
