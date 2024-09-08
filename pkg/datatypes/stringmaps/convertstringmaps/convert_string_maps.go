@@ -12,3 +12,12 @@ func ConvertGoStringMapToPulumiStringMap(goStringMap map[string]string) pulumi.S
 	}
 	return pulumiStringMap
 }
+
+// ConvertGoStringMapToPulumiMap converts a Golang string map to a Pulumi map.
+func ConvertGoStringMapToPulumiMap(goStringMap map[string]string) pulumi.Map {
+	pulumiMap := make(pulumi.Map)
+	for k, v := range goStringMap {
+		pulumiMap[k] = pulumi.String(v)
+	}
+	return pulumiMap
+}
