@@ -34,3 +34,14 @@ func setNestedValue(pulumiMap pulumi.Map, key string, value interface{}) {
 		}
 	}
 }
+
+// MergeMaps merges two golang maps
+func MergeMaps(first, second map[string]string) map[string]string {
+	if first == nil {
+		return first
+	}
+	for k, v := range second {
+		first[k] = v
+	}
+	return first
+}
