@@ -1,4 +1,4 @@
-package sortmap
+package sortstringmap
 
 import (
 	"sort"

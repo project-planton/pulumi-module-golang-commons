@@ -1,4 +1,4 @@
-package convertmaps
+package convertstringmaps
 
 import (
 	"testing"
@@ -42,7 +42,7 @@ func TestConvertGoMapToPulumiMap(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := ConvertGoMapToPulumiMap(tt.input)
+			result := ConvertGoStringMapToPulumiStringMap(tt.input)
 			for key, expectedValue := range tt.expected {
 				actualValue, ok := result[key]
 				if !ok {
