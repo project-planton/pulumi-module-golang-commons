@@ -13,8 +13,8 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func Get(ctx *pulumi.Context, gcpCredential *gcpcredential.GcpCredential, nameSuffixes ...string) (*gcp.Provider, error) {
-	serviceAccountKey, err := base64.StdEncoding.DecodeString(gcpCredential.Spec.ServiceAccountKeyBase64)
+func Get(ctx *pulumi.Context, gcpCredentialSpec *gcpcredential.GcpCredentialSpec, nameSuffixes ...string) (*gcp.Provider, error) {
+	serviceAccountKey, err := base64.StdEncoding.DecodeString(gcpCredentialSpec.ServiceAccountKeyBase64)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to decode base64 encoded"+
 			" google service account credential")

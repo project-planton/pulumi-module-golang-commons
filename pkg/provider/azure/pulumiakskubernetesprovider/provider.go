@@ -11,7 +11,7 @@ import (
 // GetWithAddedClusterWithAzureCredentials returns kubernetes provider for the added AKS cluster based on the azure provider
 func GetWithAddedClusterWithAzureCredentials(ctx *pulumi.Context,
 	addedAksCluster *containerservice.KubernetesCluster,
-	azureCredential *azurecredential.AzureCredential,
+	azureCredentialSpec *azurecredential.AzureCredentialSpec,
 	dependencies []pulumi.Resource,
 	providerName string) (*kubernetes.Provider, error) {
 
@@ -27,9 +27,9 @@ func GetWithAddedClusterWithAzureCredentials(ctx *pulumi.Context,
 			Kubeconfig: pulumi.Sprintf(AzureExecPluginKubeConfigTemplate,
 				addedAksCluster.Fqdn,
 				clusterCaCert,
-				azureCredential.Spec.ClientId,
-				azureCredential.Spec.ClientSecret,
-				azureCredential.Spec.TenantId,
+				azureCredentialSpec.ClientId,
+				azureCredentialSpec.ClientSecret,
+				azureCredentialSpec.TenantId,
 			),
 		}, pulumi.DependsOn(dependencies))
 	if err != nil {

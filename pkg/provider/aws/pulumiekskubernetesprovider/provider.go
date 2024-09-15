@@ -10,7 +10,7 @@ import (
 
 // GetWithCreatedEksClusterWithAwsCredentials returns kubernetes provider for the added eks cluster based on the aws provider
 func GetWithCreatedEksClusterWithAwsCredentials(ctx *pulumi.Context, createdEksCluster *eks.Cluster,
-	awsCredential *awscredential.AwsCredential,
+	awsCredentialSpec *awscredential.AwsCredentialSpec,
 	dependencies []pulumi.Resource, providerName string) (*kubernetes.Provider, error) {
 	provider, err := kubernetes.NewProvider(ctx,
 		providerName,
@@ -19,9 +19,9 @@ func GetWithCreatedEksClusterWithAwsCredentials(ctx *pulumi.Context, createdEksC
 			Kubeconfig: pulumi.Sprintf(AwsExecPluginKubeConfigTemplate,
 				createdEksCluster.Endpoint,
 				createdEksCluster.CertificateAuthority.Data().Elem(),
-				awsCredential.Spec.AccessKeyId,
-				awsCredential.Spec.SecretAccessKey,
-				awsCredential.Spec.Region,
+				awsCredentialSpec.AccessKeyId,
+				awsCredentialSpec.SecretAccessKey,
+				awsCredentialSpec.Region,
 			),
 		}, pulumi.DependsOn(dependencies))
 	if err != nil {

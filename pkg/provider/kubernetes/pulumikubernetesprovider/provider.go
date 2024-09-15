@@ -12,13 +12,13 @@ import (
 
 // GetWithKubernetesClusterCredential returns kubernetes provider for the kubernetes cluster credential
 func GetWithKubernetesClusterCredential(ctx *pulumi.Context,
-	kubernetesClusterCredential *kubernetesclustercredential.KubernetesClusterCredential,
+	kubernetesClusterCredentialSpec *kubernetesclustercredential.KubernetesClusterCredentialSpec,
 	providerName string) (*kubernetes.Provider, error) {
 
 	kubeConfigString := ""
 
-	if kubernetesClusterCredential.Spec.KubernetesProvider == kubernetesprovider.KubernetesProvider_gcp_gke {
-		c := kubernetesClusterCredential.Spec.GkeClusterSpec
+	if kubernetesClusterCredentialSpec.KubernetesProvider == kubernetesprovider.KubernetesProvider_gcp_gke {
+		c := kubernetesClusterCredentialSpec.GkeClusterSpec
 
 		kubeConfigString = fmt.Sprintf(pulumigkekubernetesprovider.GcpExecPluginKubeConfigTemplate,
 			c.ClusterEndpoint,
