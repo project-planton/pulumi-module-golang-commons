@@ -6,7 +6,7 @@ replace github.com/plantoncloud/planton => ../planton
 
 require (
 	github.com/pkg/errors v0.9.1
-	github.com/plantoncloud/planton/apis v0.0.0-20240921103259-23d140662c70
+	github.com/plantoncloud/planton/apis v0.0.0-20240921104154-6949599116e2
 	github.com/pulumi/pulumi-aws/sdk/v6 v6.42.1
 	github.com/pulumi/pulumi-azure/sdk/v5 v5.85.0
 	github.com/pulumi/pulumi-gcp/sdk/v7 v7.29.0
