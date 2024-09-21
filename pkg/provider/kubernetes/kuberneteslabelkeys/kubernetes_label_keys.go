@@ -1,7 +1,7 @@
 package kuberneteslabelkeys
 
 import (
-	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
+	"github.com/plantoncloud/planton/apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/labels/labelkeys"
 	"strings"
 )

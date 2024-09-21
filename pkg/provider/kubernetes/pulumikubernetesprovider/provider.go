@@ -3,7 +3,7 @@ package pulumikubernetesprovider
 import (
 	"fmt"
 	"github.com/pkg/errors"
-	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/kubernetesclustercredential"
+	"github.com/plantoncloud/planton/apis/zzgo/cloud/planton/apis/connect/v1/kubernetesclustercredential"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/gcp/pulumigkekubernetesprovider"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"

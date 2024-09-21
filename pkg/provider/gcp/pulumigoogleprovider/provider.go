@@ -3,8 +3,8 @@ package pulumigoogleprovider
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
-	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/connect/v1/gcpcredential"
+	"github.com/plantoncloud/planton/apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
+	"github.com/plantoncloud/planton/apis/zzgo/cloud/planton/apis/connect/v1/gcpcredential"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/pulumi/pulumioutput"
 	"reflect"
 
