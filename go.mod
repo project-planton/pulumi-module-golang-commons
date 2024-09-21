@@ -2,7 +2,7 @@ module github.com/plantoncloud/pulumi-module-golang-commons
 
 go 1.23.0
 
-replace github.com/plantoncloud/planton => ../planton
+//replace github.com/plantoncloud/planton => ../planton
 
 require (
 	github.com/pkg/errors v0.9.1
