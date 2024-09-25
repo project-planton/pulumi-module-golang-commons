@@ -1,7 +1,10 @@
 package stackinput
 
 import (
+	"fmt"
+	"github.com/bufbuild/protovalidate-go"
 	"github.com/pkg/errors"
+	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/stackinput/fieldsextractor"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
@@ -42,6 +45,23 @@ func LoadStackInput(ctx *pulumi.Context, stackInput proto.Message) error {
 
 	if err := protojson.Unmarshal(jsonBytes, stackInput); err != nil {
 		return errors.Wrap(err, "failed to load json into proto message")
+	}
+
+	targetSpec, err := fieldsextractor.ExtractApiResourceSpecField(stackInput)
+	if err != nil {
+		return errors.Wrap(err, "failed to extract api resource spec field")
+	}
+
+	v, err := protovalidate.New(
+		protovalidate.WithDisableLazy(true),
+		protovalidate.WithMessages((*targetSpec).Interface()),
+	)
+	if err != nil {
+		fmt.Println("failed to initialize validator:", err)
+	}
+
+	if err = v.Validate((*targetSpec).Interface()); err != nil {
+		return errors.Errorf("%s", err)
 	}
 	return nil
 }
