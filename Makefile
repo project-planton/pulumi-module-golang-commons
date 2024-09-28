@@ -24,4 +24,4 @@ test:
 
 .PHONY: update-deps
 update-deps:
-	go get github.com/plantoncloud/planton@latest
+	go get github.com/plantoncloud/project-planton@latest
