@@ -5,7 +5,6 @@ import (
 	"github.com/bufbuild/protovalidate-go"
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/stackinput/fieldsextractor"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"os"
@@ -13,20 +12,20 @@ import (
 )
 
 const (
-	PulumiConfigKey = "planton-cloud:stack-input"
-	FilePathEnvVar  = "STACK_INPUT_FILE_PATH"
+	FilePathEnvVar    = "STACK_INPUT_FILE_PATH"
+	YamlContentEnvVar = "STACK_INPUT_YAML"
 )
 
-func LoadStackInput(ctx *pulumi.Context, stackInput proto.Message) error {
-	stackInputString, ok := ctx.GetConfig(PulumiConfigKey)
+func LoadStackInput(stackInput proto.Message) error {
 	var jsonBytes []byte
 	var err error
 
-	if !ok {
-		stackInputFilePath := os.Getenv("STACK_INPUT_FILE_PATH")
+	stackInputYaml := os.Getenv(YamlContentEnvVar)
+	if stackInputYaml != "" {
+		stackInputFilePath := os.Getenv(FilePathEnvVar)
 		if stackInputFilePath == "" {
-			return errors.Errorf("stack-input not found in pulumi config %s or in %s environment variable",
-				PulumiConfigKey, FilePathEnvVar)
+			return errors.Errorf("stack-input not found in %s or in %s environment variables",
+				YamlContentEnvVar, FilePathEnvVar)
 		}
 		inputFileBytes, err := os.ReadFile(stackInputFilePath)
 		if err != nil {
@@ -37,7 +36,7 @@ func LoadStackInput(ctx *pulumi.Context, stackInput proto.Message) error {
 			return errors.Wrap(err, "failed to load yaml to json")
 		}
 	} else {
-		jsonBytes, err = yaml.YAMLToJSON([]byte(stackInputString))
+		jsonBytes, err = yaml.YAMLToJSON([]byte(stackInputYaml))
 		if err != nil {
 			return errors.Wrap(err, "failed to load yaml to json")
 		}
