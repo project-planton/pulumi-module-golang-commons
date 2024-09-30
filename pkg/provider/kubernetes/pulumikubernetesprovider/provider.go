@@ -1,9 +1,9 @@
 package pulumikubernetesprovider
 
 import (
+	kubernetesclustercredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/credential/kubernetesclustercredential/v1"
 	"fmt"
 	"github.com/pkg/errors"
-	"github.com/plantoncloud/project-planton/apis/zzgo/cloud/planton/apis/connect/v1/kubernetesclustercredential"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/gcp/pulumigkekubernetesprovider"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -11,12 +11,12 @@ import (
 
 // GetWithKubernetesClusterCredential returns kubernetes provider for the kubernetes cluster credential
 func GetWithKubernetesClusterCredential(ctx *pulumi.Context,
-	kubernetesClusterCredentialSpec *kubernetesclustercredential.KubernetesClusterCredentialSpec,
+	kubernetesClusterCredentialSpec *kubernetesclustercredentialv1.KubernetesClusterCredentialSpec,
 	providerName string) (*kubernetes.Provider, error) {
 
 	kubeConfigString := ""
 
-	if kubernetesClusterCredentialSpec.KubernetesProvider == kubernetesclustercredential.KubernetesProvider_gcp_gke {
+	if kubernetesClusterCredentialSpec.KubernetesProvider == kubernetesclustercredentialv1.KubernetesProvider_gcp_gke {
 		c := kubernetesClusterCredentialSpec.GkeCluster
 
 		kubeConfigString = fmt.Sprintf(pulumigkekubernetesprovider.GcpExecPluginKubeConfigTemplate,

@@ -2,12 +2,12 @@ module github.com/plantoncloud/pulumi-module-golang-commons
 
 go 1.23.0
 
-//replace github.com/plantoncloud/project-planton => ../planton
+//replace buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go => ../planton
 
 require (
+	buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go v1.34.2-20240930080942-f846802b359d.2
 	github.com/bufbuild/protovalidate-go v0.7.0
 	github.com/pkg/errors v0.9.1
-	github.com/plantoncloud/project-planton/apis v0.0.0-20240928044211-9168d6c7a46b
 	github.com/pulumi/pulumi-aws/sdk/v6 v6.42.1
 	github.com/pulumi/pulumi-azure/sdk/v5 v5.85.0
 	github.com/pulumi/pulumi-gcp/sdk/v7 v7.29.0

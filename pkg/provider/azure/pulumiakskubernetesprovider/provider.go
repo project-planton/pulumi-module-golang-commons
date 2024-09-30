@@ -1,8 +1,8 @@
 package pulumiakskubernetesprovider
 
 import (
+	azurecredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/credential/azurecredential/v1"
 	"github.com/pkg/errors"
-	"github.com/plantoncloud/project-planton/apis/zzgo/cloud/planton/apis/connect/v1/azurecredential"
 	"github.com/pulumi/pulumi-azure/sdk/v5/go/azure/containerservice"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -11,7 +11,7 @@ import (
 // GetWithAddedClusterWithAzureCredentials returns kubernetes provider for the added AKS cluster based on the azure provider
 func GetWithAddedClusterWithAzureCredentials(ctx *pulumi.Context,
 	addedAksCluster *containerservice.KubernetesCluster,
-	azureCredentialSpec *azurecredential.AzureCredentialSpec,
+	azureCredentialSpec *azurecredentialv1.AzureCredentialSpec,
 	dependencies []pulumi.Resource,
 	providerName string) (*kubernetes.Provider, error) {
 

@@ -1,10 +1,9 @@
 package pulumigoogleprovider
 
 import (
+	gcpcredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/credential/gcpcredential/v1"
 	"encoding/base64"
 	"fmt"
-	"github.com/plantoncloud/project-planton/apis/zzgo/cloud/planton/apis/commons/english/enums/englishword"
-	"github.com/plantoncloud/project-planton/apis/zzgo/cloud/planton/apis/connect/v1/gcpcredential"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/pulumi/pulumioutput"
 	"reflect"
 
@@ -13,7 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func Get(ctx *pulumi.Context, gcpCredentialSpec *gcpcredential.GcpCredentialSpec, nameSuffixes ...string) (*gcp.Provider, error) {
+func Get(ctx *pulumi.Context, gcpCredentialSpec *gcpcredentialv1.GcpCredentialSpec, nameSuffixes ...string) (*gcp.Provider, error) {
 	serviceAccountKey, err := base64.StdEncoding.DecodeString(gcpCredentialSpec.ServiceAccountKeyBase64)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to decode base64 encoded"+
@@ -29,7 +28,7 @@ func Get(ctx *pulumi.Context, gcpCredentialSpec *gcpcredential.GcpCredentialSpec
 }
 
 func ProviderResourceName(suffixes []string) string {
-	name := englishword.EnglishWord_google.String()
+	name := "google"
 	for _, s := range suffixes {
 		name = fmt.Sprintf("%s-%s", name, s)
 	}
