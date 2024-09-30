@@ -7,12 +7,14 @@ go 1.23.0
 require (
 	buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go v1.34.2-20240930080942-f846802b359d.2
 	github.com/bufbuild/protovalidate-go v0.7.0
+	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572
 	github.com/pkg/errors v0.9.1
 	github.com/pulumi/pulumi-aws/sdk/v6 v6.42.1
 	github.com/pulumi/pulumi-azure/sdk/v5 v5.85.0
 	github.com/pulumi/pulumi-gcp/sdk/v7 v7.29.0
 	github.com/pulumi/pulumi-kubernetes/sdk/v4 v4.7.1
 	github.com/pulumi/pulumi/sdk/v3 v3.129.0
+	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/protobuf v1.34.2
 	sigs.k8s.io/yaml v1.4.0
