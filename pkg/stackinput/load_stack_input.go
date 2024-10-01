@@ -13,26 +13,32 @@ import (
 )
 
 const (
-	PulumiConfigKey = "planton-cloud:stack-input"
-	FilePathEnvVar  = "STACK_INPUT_FILE_PATH"
+	PulumiConfigKey   = "planton-cloud:stack-input"
+	FilePathEnvVar    = "STACK_INPUT_FILE_PATH"
+	YamlContentEnvVar = "STACK_INPUT_YAML"
 )
 
 func LoadStackInput(ctx *pulumi.Context, stackInput proto.Message) error {
 	stackInputString, ok := ctx.GetConfig(PulumiConfigKey)
-	var jsonBytes []byte
+	var jsonBytes, stackInputYamlBytes []byte
 	var err error
 
 	if !ok {
-		stackInputFilePath := os.Getenv("STACK_INPUT_FILE_PATH")
-		if stackInputFilePath == "" {
-			return errors.Errorf("stack-input not found in pulumi config %s or in %s environment variable",
-				PulumiConfigKey, FilePathEnvVar)
+		yamlContent := os.Getenv(YamlContentEnvVar)
+		if yamlContent != "" {
+			stackInputYamlBytes = []byte(yamlContent)
+		} else {
+			stackInputFilePath := os.Getenv(FilePathEnvVar)
+			if stackInputFilePath == "" {
+				return errors.Errorf("stack-input not found in pulumi config %s or in %s environment variable",
+					PulumiConfigKey, FilePathEnvVar)
+			}
+			stackInputYamlBytes, err = os.ReadFile(stackInputFilePath)
+			if err != nil {
+				return errors.Wrap(err, "failed to read input file")
+			}
 		}
-		inputFileBytes, err := os.ReadFile(stackInputFilePath)
-		if err != nil {
-			return errors.Wrap(err, "failed to read input file")
-		}
-		jsonBytes, err = yaml.YAMLToJSON(inputFileBytes)
+		jsonBytes, err = yaml.YAMLToJSON(stackInputYamlBytes)
 		if err != nil {
 			return errors.Wrap(err, "failed to load yaml to json")
 		}
