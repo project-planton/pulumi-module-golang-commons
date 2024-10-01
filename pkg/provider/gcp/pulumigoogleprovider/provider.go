@@ -1,7 +1,7 @@
 package pulumigoogleprovider
 
 import (
-	gcpcredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/credential/gcpcredential/v1"
+	gcpcredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/credential/gcpcredential/v1"
 	"encoding/base64"
 	"fmt"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/pulumi/pulumioutput"

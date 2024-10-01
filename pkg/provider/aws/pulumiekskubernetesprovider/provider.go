@@ -1,7 +1,7 @@
 package pulumiekskubernetesprovider
 
 import (
-	awscredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/credential/awscredential/v1"
+	awscredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/credential/awscredential/v1"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi-aws/sdk/v6/go/aws/eks"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"

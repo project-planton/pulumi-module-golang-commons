@@ -5,7 +5,7 @@ go 1.23.0
 //replace buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go => ../planton
 
 require (
-	buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go v1.34.2-20240930080942-f846802b359d.2
+	buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go v1.34.2-20241001121943-29543e670f7b.2
 	github.com/bufbuild/protovalidate-go v0.7.0
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572
 	github.com/pkg/errors v0.9.1
