@@ -12,15 +12,18 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func Get(ctx *pulumi.Context, gcpCredentialSpec *gcpcredentialv1.GcpCredentialSpec, nameSuffixes ...string) (*gcp.Provider, error) {
+func Get(ctx *pulumi.Context, gcpCredentialSpec *gcpcredentialv1.GcpCredentialSpec,
+	nameSuffixes ...string) (*gcp.Provider, error) {
 	serviceAccountKey, err := base64.StdEncoding.DecodeString(gcpCredentialSpec.ServiceAccountKeyBase64)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to decode base64 encoded"+
 			" google service account credential")
 	}
-	provider, err := gcp.NewProvider(ctx, ProviderResourceName(nameSuffixes), &gcp.ProviderArgs{
-		Credentials: pulumi.String(serviceAccountKey),
-	})
+	provider, err := gcp.NewProvider(ctx,
+		ProviderResourceName(nameSuffixes),
+		&gcp.ProviderArgs{
+			Credentials: pulumi.String(serviceAccountKey),
+		})
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get new provider")
 	}
