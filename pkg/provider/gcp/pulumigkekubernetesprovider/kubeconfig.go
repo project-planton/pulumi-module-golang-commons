@@ -1,7 +1,7 @@
 package pulumigkekubernetesprovider
 
 const (
-	GcpExecPluginPath = "/usr/local/bin/kube-client-go-gcp-exec-plugin"
+	GcpExecPluginBinary = "kube-client-go-gcp-exec-plugin"
 )
 
 // GcpExecPluginKubeConfigTemplate requires the following inputs for rendering a kubeconfig that works
