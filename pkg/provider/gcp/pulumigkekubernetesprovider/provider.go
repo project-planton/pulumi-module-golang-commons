@@ -21,7 +21,7 @@ func GetWithCreatedGkeClusterAndCreatedGsaKey(ctx *pulumi.Context,
 			Kubeconfig: pulumi.Sprintf(GcpExecPluginKubeConfigTemplate,
 				createdGkeCluster.Endpoint,
 				createdGkeCluster.MasterAuth.ClusterCaCertificate().Elem(),
-				GcpExecPluginBinary,
+				GcpExecPluginPath,
 				createdServiceAccountKey.PrivateKey),
 		}, pulumi.DependsOn(dependencies))
 	if err != nil {

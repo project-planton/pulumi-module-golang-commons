@@ -34,7 +34,7 @@ func GetWithKubernetesClusterCredential(ctx *pulumi.Context,
 		kubeConfigString = fmt.Sprintf(pulumigkekubernetesprovider.GcpExecPluginKubeConfigTemplate,
 			c.ClusterEndpoint,
 			c.ClusterCaData,
-			pulumigkekubernetesprovider.GcpExecPluginBinary,
+			pulumigkekubernetesprovider.GcpExecPluginPath,
 			c.ServiceAccountKeyBase64)
 	}
 
