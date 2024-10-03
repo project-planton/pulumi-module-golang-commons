@@ -14,20 +14,24 @@ import (
 
 func Get(ctx *pulumi.Context, gcpCredentialSpec *gcpcredentialv1.GcpCredentialSpec,
 	nameSuffixes ...string) (*gcp.Provider, error) {
-	serviceAccountKey, err := base64.StdEncoding.DecodeString(gcpCredentialSpec.ServiceAccountKeyBase64)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to decode base64 encoded"+
-			" google service account credential")
+	gcpProviderArgs := &gcp.ProviderArgs{}
+
+	//if stack-input contains gcp-credentials, provider will be created with those credentials
+	if gcpCredentialSpec != nil {
+		serviceAccountKey, err := base64.StdEncoding.DecodeString(gcpCredentialSpec.ServiceAccountKeyBase64)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to decode base64 encoded"+
+				" google service account credential")
+		}
+		gcpProviderArgs = &gcp.ProviderArgs{Credentials: pulumi.String(serviceAccountKey)}
 	}
-	provider, err := gcp.NewProvider(ctx,
-		ProviderResourceName(nameSuffixes),
-		&gcp.ProviderArgs{
-			Credentials: pulumi.String(serviceAccountKey),
-		})
+
+	googleProvider, err := gcp.NewProvider(ctx, ProviderResourceName(nameSuffixes), gcpProviderArgs)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to get new provider")
+		return nil, errors.Wrap(err, "failed to create google provider")
 	}
-	return provider, nil
+
+	return googleProvider, nil
 }
 
 func ProviderResourceName(suffixes []string) string {
