@@ -26,6 +26,19 @@ func GetWithKubernetesClusterCredential(ctx *pulumi.Context,
 		return provider, nil
 	}
 
+	if kubernetesClusterCredentialSpec.KubernetesProvider == kubernetesclustercredentialv1.KubernetesProvider_gcp_gke &&
+		kubernetesClusterCredentialSpec.GkeCluster == nil {
+		provider, err := kubernetes.NewProvider(ctx,
+			providerName,
+			&kubernetes.ProviderArgs{
+				EnableServerSideApply: pulumi.Bool(true),
+			})
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to get new provider")
+		}
+		return provider, nil
+	}
+
 	kubeConfigString := ""
 
 	if kubernetesClusterCredentialSpec.KubernetesProvider == kubernetesclustercredentialv1.KubernetesProvider_gcp_gke {
