@@ -1,7 +1,7 @@
 package kuberneteslabelkeys
 
 import (
-	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/labels/labelkeys"
+	"github.com/project-planton/pulumi-module-golang-commons/pkg/labels/labelkeys"
 )
 
 var (

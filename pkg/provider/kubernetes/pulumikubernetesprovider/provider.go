@@ -1,10 +1,11 @@
 package pulumikubernetesprovider
 
 import (
-	kubernetesclustercredentialv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/credential/kubernetesclustercredential/v1"
 	"fmt"
+
+	kubernetesclustercredentialv1 "buf.build/gen/go/project-planton/apis/protocolbuffers/go/project/planton/credential/kubernetesclustercredential/v1"
 	"github.com/pkg/errors"
-	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/gcp/pulumigkekubernetesprovider"
+	"github.com/project-planton/pulumi-module-golang-commons/pkg/provider/gcp/pulumigkekubernetesprovider"
 	"github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )

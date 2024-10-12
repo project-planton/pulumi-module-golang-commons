@@ -2,8 +2,6 @@ package file
 
 import (
 	"bytes"
-	sprig "github.com/go-task/slim-sprig"
-	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/util/shell"
 	"io"
 	"net/http"
 	"os"
@@ -11,6 +9,9 @@ import (
 	"path/filepath"
 	"strings"
 	"text/template"
+
+	sprig "github.com/go-task/slim-sprig"
+	"github.com/project-planton/pulumi-module-golang-commons/pkg/util/shell"
 
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"

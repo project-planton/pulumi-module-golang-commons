@@ -1,11 +1,11 @@
-module github.com/plantoncloud/pulumi-module-golang-commons
+module github.com/project-planton/pulumi-module-golang-commons
 
-go 1.23.0
+go 1.23.1
 
-//replace buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go => ../planton
+//replace buf.build/gen/go/project-planton/apis/protocolbuffers/go => ../planton
 
 require (
-	buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go v1.34.2-20241001121943-29543e670f7b.2
+	buf.build/gen/go/project-planton/apis/protocolbuffers/go v1.35.1-20241012091823-fbe6fb0746f9.1
 	github.com/bufbuild/protovalidate-go v0.7.0
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572
 	github.com/pkg/errors v0.9.1
@@ -16,12 +16,12 @@ require (
 	github.com/pulumi/pulumi/sdk/v3 v3.129.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.9.0
-	google.golang.org/protobuf v1.34.2
+	google.golang.org/protobuf v1.35.1
 	sigs.k8s.io/yaml v1.4.0
 )
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.34.2-20240920164238-5a7b106cbb87.2 // indirect
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.35.1-20240920164238-5a7b106cbb87.1 // indirect
 	dario.cat/mergo v1.0.0 // indirect
 	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect

@@ -2,13 +2,14 @@ package stackinput
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/bufbuild/protovalidate-go"
 	"github.com/pkg/errors"
-	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/stackinput/fieldsextractor"
+	"github.com/project-planton/pulumi-module-golang-commons/pkg/stackinput/fieldsextractor"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
-	"os"
 	"sigs.k8s.io/yaml"
 )
 

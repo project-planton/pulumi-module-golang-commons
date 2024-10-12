@@ -24,4 +24,4 @@ test:
 
 .PHONY: update-deps
 update-deps:
-	go get buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go@latest
+	go get buf.build/gen/go/project-planton/apis/protocolbuffers/go@latest
