@@ -2,10 +2,8 @@ module github.com/project-planton/pulumi-module-golang-commons
 
 go 1.23.1
 
-//replace buf.build/gen/go/project-planton/apis/protocolbuffers/go => ../planton
-
 require (
-	buf.build/gen/go/project-planton/apis/protocolbuffers/go v1.35.1-20241012091823-fbe6fb0746f9.1
+	buf.build/gen/go/project-planton/apis/protocolbuffers/go v1.35.1-20241106042319-91bc33237f01.1
 	github.com/bufbuild/protovalidate-go v0.7.0
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572
 	github.com/pkg/errors v0.9.1
